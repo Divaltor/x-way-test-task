@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block header %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+{% endblock header %}
+
+{% block content %}
+    <div class="d-flex justify-content-center align-items-center h-100">
+        <form action="{% url 'login' %}" method="post" class=" bg-white text-center py-5 px-5 rounded shadow-lg" style="min-width: 450px">
+            {% csrf_token %}
+            <h1 class="h3 mb-3 font-weight-normal">Вход в профиль</h1>
+            <label class="sr-only" for="{{ form.username.auto_id }}"></label>
+            <input id="{{ form.username.auto_id }}" name="{{ form.username.html_name }}" class="form-control"
+                   placeholder="Логин" required autofocus
+                   type="text">
+            <label class="sr-only" for="{{ form.password.auto_id }}"></label>
+            <input id="{{ form.password.auto_id }}" name="{{ form.password.html_name }}" class="form-control"
+                   placeholder="Пароль" required autofocus
+                   type="password">
+            <div class="mt-3" style="min-width: 300px">
+                <button type="submit" class="btn btn-lg btn-primary btn-block">Логин</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

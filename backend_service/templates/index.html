@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block header %}
+    {% load static %}
+    {% block title %}
+        <title>Home page</title>
+    {% endblock title %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock header %}
+
+{% block content %}
+    <div class="d-flex justify-content-center align-items-center h-100 m-auto" style="max-width: 50%;">
+    <div class="d-flex bg-white rounded shadow-lg p-5" style="max-height: 50%">
+         <table id="albumsTable">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Photos</th>
+            </tr>
+
+            </thead>
+        </table>
+    </div>
+
+    </div>
+{% endblock content %}
+{% block scripts %}
+    <script>
+        $(document).ready(function () {
+            $('#albumsTable').DataTable({
+                ajax: {
+                    url: '{% url 'albums' %}',
+                    dataSrc: ''
+                },
+                columns: [
+                    {data: 'id'},
+                    {data: 'title'},
+                    {
+                        render: function (data, type, row) {
+                            const url = '{% url 'album-with-photo' 1 %}'.replace('1', row.id);
+
+                            return `<a href="${url}">View photos</a>`
+                        }
+                    }
+                ],
+                ordering: false,
+                searching: false
+            });
+        });
+    </script>
+{% endblock %}
