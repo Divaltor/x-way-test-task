@@ -12,7 +12,7 @@ class Pool:
         self.threads = threads or get_optimal_cpu_count()
         self.chunk_size = chunk_size or 150
 
-    def send_to_pool(self, data: list[list], func: Callable, *args, **kwargs) -> Iterator[_T]:
+    def send_to_pool(self, data: list[_T], func: Callable, *args, **kwargs) -> Iterator[_T]:
         futures = []
 
         with concurrent.futures.ThreadPoolExecutor(max_workers=self.threads) as pool:
