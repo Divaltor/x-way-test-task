@@ -23,7 +23,7 @@ Run management script with command:
 $ docker-compose exec app python manage.py fetch_albums [--threads THREADS (int)] [--chunk_size CHUNK_SIZE (int)]
 ```
 
-Available routes:
+### Available routes:
 
 **GET**
 - / - Home page (table with albums)
@@ -36,8 +36,7 @@ Available routes:
   {
     "id": 1,
     "title": "Lorem ipsum"
-  },
-  ...
+  }
 ]
 ```
 - /albums/:id/ - Get album by id with all the photos belong to him
@@ -51,8 +50,7 @@ Available routes:
       "title": "Some image title",
       "url": "https://some.link",
       "thumbnail_url": "https://some.link/thumbnail"
-    },
-    ...
+    }
   ]
 }
 ```
