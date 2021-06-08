@@ -22,3 +22,44 @@ Run management script with command:
 ```bash
 $ docker-compose exec app python manage.py fetch_albums [--threads THREADS (int)] [--chunk_size CHUNK_SIZE (int)]
 ```
+
+Available routes:
+
+**GET**
+- / - Home page (table with albums)
+- /login - Login page
+- /logout
+- /albums/:id/photos/ - Page with photos table for concrete album
+- /albums/ - Get all albums in format
+```json
+[
+  {
+    "id": 1,
+    "title": "Lorem ipsum"
+  },
+  ...
+]
+```
+- /albums/:id/ - Get album by id with all the photos belong to him
+```json
+{
+  "id": 1,
+  "title": "Lorem ipsum",
+  "photos": [
+    {
+      "id": 1,
+      "title": "Some image title",
+      "url": "https://some.link",
+      "thumbnail_url": "https://some.link/thumbnail"
+    },
+    ...
+  ]
+}
+```
+
+**PATCH**
+- /albums/:id/ - Update album by ID (accepted JSON only with title parameter)
+
+**DELETE**
+- /albums/:id/ - Delete album by ID
+
