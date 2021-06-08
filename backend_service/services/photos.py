@@ -127,7 +127,6 @@ class AlbumsFetchTask:
                 except Exception as ex:
                     logger.exception(ex)
 
-        logger.debug(results)
         return results
 
     def fetch_albums(self) -> list[Album]:
