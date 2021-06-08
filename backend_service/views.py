@@ -32,7 +32,6 @@ class AlbumWithPhotosPageView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        logger.debug(kwargs)
         context['album'] = Album.objects.get(pk=kwargs.get('pk'))
 
         return context
