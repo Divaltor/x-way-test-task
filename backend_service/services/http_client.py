@@ -2,7 +2,6 @@ from abc import ABCMeta
 
 import httpx
 from httpx import Response
-from loguru import logger
 
 
 class HTTPClient(metaclass=ABCMeta):

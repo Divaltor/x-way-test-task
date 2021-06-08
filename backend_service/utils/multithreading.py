@@ -1,8 +1,5 @@
-from typing import Callable, Iterator, TypeVar, Iterable
-
 import concurrent.futures
-
-from loguru import logger
+from typing import Callable, Iterator, TypeVar
 
 from backend_service.utils.parts import get_optimal_cpu_count, split_by_chunks
 
@@ -16,7 +13,6 @@ class Pool:
         self.chunk_size = chunk_size or 150
 
     def send_to_pool(self, data: list[list], func: Callable, *args, **kwargs) -> Iterator[_T]:
-
         futures = []
 
         with concurrent.futures.ThreadPoolExecutor(max_workers=self.threads) as pool:
