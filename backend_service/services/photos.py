@@ -11,6 +11,7 @@ from PIL import Image as PILImage
 from any_case import converts_keys
 from django.core.files.base import ContentFile
 from django.db import transaction
+from httpx import TimeoutException
 from loguru import logger
 from rest_framework.exceptions import ValidationError
 
@@ -31,7 +32,10 @@ def process_photos(photos: list[Photo]) -> list[Photo]:
     logger.debug(len(photos))
     for photo in photos:
         url = replace_image_url_to_higher_size(photo.url)
-        response = httpx.get(url, timeout=5)
+        try:
+            response = httpx.get(url, timeout=5)
+        except TimeoutException:
+            continue
 
         if response.is_error:
             logger.warning(f'Failed to download image {photo.title} from album ID: {photo.album}')
